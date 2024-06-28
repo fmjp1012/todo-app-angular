@@ -5,6 +5,7 @@ import { TodoCategory } from '../../models/todo-category.model';
 import { RouterLink } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import {MatButtonModule} from '@angular/material/button';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-todo',
@@ -27,7 +28,7 @@ export class CategoryComponent {
 
   deleteTodoCategory(id: number): void {
     this.todoCategoryService.delete(id).subscribe({
-      error: (e) => alert(e),
+      error: (e: HttpErrorResponse) => alert(e.error),
       complete: () => (this.todoCategories = this.todoCategories.filter(todoCategory => todoCategory.id != id))
     });
   }

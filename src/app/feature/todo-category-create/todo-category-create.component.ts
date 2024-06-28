@@ -8,6 +8,7 @@ import { MatSelectModule } from '@angular/material/select';
 import { Router } from '@angular/router';
 import { TodoCategoryColor } from '../../models/todo-category-color.model';
 import { TodoCategoryService } from '../../services/todo-category.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-category-create',
@@ -50,7 +51,7 @@ export class CategoryCreateComponent {
 
   onSubmit(): void {
     this.todoCategoryService.create(this.todoCategoryForm).subscribe({
-      error: (e) => alert(e),
+      error: (e: HttpErrorResponse) => alert(e.error),
       complete: () => this.router.navigate(['/todoCategories']),
     });
   }

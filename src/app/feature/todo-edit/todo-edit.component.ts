@@ -11,6 +11,7 @@ import { TodoState } from '../../models/todo-state.model';
 import { TodoCategoryService } from '../../services/todo-category.service';
 import { TodoService } from '../../services/todo.service';
 import { Todo } from '../../models/todo.model';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-todo-edit',
@@ -89,7 +90,7 @@ export class TodoEditComponent {
 
   onSubmit(): void {
     this.todoService.edit(this.editingTodoId, this.todoForm).subscribe({
-      error: (e) => alert(e),
+      error: (e: HttpErrorResponse) => alert(e.error),
       complete: () => this.router.navigate(['/todos']),
     });
   }

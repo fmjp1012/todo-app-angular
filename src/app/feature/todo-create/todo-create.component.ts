@@ -69,7 +69,6 @@ export class TodoCreateComponent {
   onSubmit(): void {
     this.todoService.create(this.todoForm).subscribe({
       error: (e: HttpErrorResponse) => {
-        console.log(e.error);
         alert(e.error);
       },
       complete: () => this.router.navigate(['/todos']),

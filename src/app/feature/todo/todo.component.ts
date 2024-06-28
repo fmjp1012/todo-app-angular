@@ -7,6 +7,7 @@ import { RouterLink } from '@angular/router';
 import { MatTableModule } from '@angular/material/table';
 import { MatButtonModule } from '@angular/material/button';
 import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-todo',
@@ -44,7 +45,7 @@ export class TodoComponent {
 
   deleteTodo(id: number): void {
     this.todoService.delete(id).subscribe({
-      error: (e) => alert(e),
+      error: (e: HttpErrorResponse) => alert(e.error),
       complete: () =>
         (this.todos = this.todos.filter((todoItem) => todoItem.todo.id != id)),
     });

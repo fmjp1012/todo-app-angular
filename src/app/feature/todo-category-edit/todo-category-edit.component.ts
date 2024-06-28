@@ -10,6 +10,7 @@ import { TodoCategoryColor } from '../../models/todo-category-color.model';
 import { TodoCategory } from '../../models/todo-category.model';
 import { TodoCategoryService } from '../../services/todo-category.service';
 import { TodoService } from '../../services/todo.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-todo-category-edit',
@@ -82,7 +83,7 @@ export class TodoCategoryEditComponent {
     this.todoCategoryService
       .edit(this.editingTodoCategoryId, this.todoCategoryForm)
       .subscribe({
-        error: (e) => alert(e),
+        error: (e: HttpErrorResponse) => alert(e.error),
         complete: () => this.router.navigate(['/todoCategories']),
       });
   }
