@@ -1,0 +1,24 @@
+<form [formGroup]="todoCategoryForm" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <mat-label>Name</mat-label>
+    <input matInput id="name" type="text" formControlName="name" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Slug</mat-label>
+    <textarea matInput id="slug" type="text" formControlName="slug"></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Color</mat-label>
+    <mat-select [compareWith]="compareFn" formControlName="color" id="color">
+      <mat-option *ngFor="let color of colors" [value]="color.code">
+        {{ color.code }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button type="submit" [disabled]="!todoCategoryForm.valid">
+    Edit
+  </button>
+</form>

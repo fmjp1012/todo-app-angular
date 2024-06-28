@@ -1,0 +1,43 @@
+<table mat-table [dataSource]="todos" class="mat-elevation-z8">
+  <ng-container matColumnDef="title">
+    <th mat-header-cell *matHeaderCellDef>Title</th>
+    <td mat-cell *matCellDef="let todoItem">{{ todoItem.todo.title }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="body">
+    <th mat-header-cell *matHeaderCellDef>Body</th>
+    <td mat-cell *matCellDef="let todoItem">{{ todoItem.todo.body }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="state">
+    <th mat-header-cell *matHeaderCellDef>State</th>
+    <td mat-cell *matCellDef="let todoItem">{{getStateName(todoItem.todo.state)}}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="category">
+    <th mat-header-cell *matHeaderCellDef>Category</th>
+    <td mat-cell *matCellDef="let todoItem">
+      {{ todoItem.todoCategory.name }}
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="edit">
+    <th mat-header-cell *matHeaderCellDef>Edit</th>
+    <td mat-cell *matCellDef="let todoItem">
+      <a mat-raised-button [routerLink]="['/todos/edit', todoItem.todo.id]">
+        Edit
+      </a>
+    </td>
+  </ng-container>
+
+  <ng-container matColumnDef="delete">
+    <th mat-header-cell *matHeaderCellDef>Delete</th>
+    <td mat-cell *matCellDef="let todoItem">
+      <button mat-raised-button (click)="deleteTodo(todoItem.todo.id!)">
+        Delete
+      </button>
+    </td>
+  </ng-container>
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns" [ngClass]="getColorClass(row.todoCategory.color)"></tr>
+</table>
