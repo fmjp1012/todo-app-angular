@@ -1,0 +1,36 @@
+<form [formGroup]="todoForm" (ngSubmit)="onSubmit()">
+  <mat-form-field>
+    <mat-label>Title</mat-label>
+    <input matInput id="title" type="text" formControlName="title" />
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Body</mat-label>
+    <textarea matInput id="body" type="text" formControlName="body"></textarea>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>Category Id</mat-label>
+    <mat-select formControlName="categoryId" id="categoryId">
+      <mat-option
+        *ngFor="let todoCategory of todoCategories"
+        [value]="todoCategory.id"
+      >
+        {{ todoCategory.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <mat-form-field>
+    <mat-label>State</mat-label>
+    <mat-select formControlName="state" id="state">
+      <mat-option *ngFor="let state of states" [value]="state.code">
+        {{ state.name }}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <button mat-raised-button type="submit" [disabled]="!todoForm.valid">
+    Edit
+  </button>
+</form>

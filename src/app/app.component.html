@@ -1,1 +1,33 @@
+<h1>Todo App</h1>
+<nav mat-tab-nav-bar [tabPanel]="tabPanel">
+  <a
+    mat-tab-link
+    routerLink="/todos"
+    routerLinkActive="active"
+    ariaCurrentWhenActive="page"
+    >Todo一覧</a
+  >
+  <a
+    mat-tab-link
+    routerLink="/todos/create"
+    routerLinkActive="active"
+    ariaCurrentWhenActive="page"
+    >Todo作成</a
+  >
+  <a
+    mat-tab-link
+    routerLink="/todoCategories"
+    routerLinkActive="active"
+    ariaCurrentWhenActive="page"
+    >Category一覧</a
+  >
+  <a
+    mat-tab-link
+    routerLink="/todoCategories/create"
+    routerLinkActive="active"
+    ariaCurrentWhenActive="page"
+    >Category作成</a
+  >
+</nav>
+<mat-tab-nav-panel #tabPanel></mat-tab-nav-panel>
 <router-outlet></router-outlet>
