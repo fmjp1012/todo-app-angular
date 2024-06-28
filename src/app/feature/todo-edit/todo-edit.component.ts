@@ -1,4 +1,4 @@
-import { NgFor, NgIf } from '@angular/common';
+import { CommonModule, NgFor, NgIf } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
@@ -23,6 +23,7 @@ import { Todo } from '../../models/todo.model';
     MatInputModule,
     MatSelectModule,
     MatButtonModule,
+    CommonModule,
   ],
   templateUrl: './todo-edit.component.html',
   styleUrl: './todo-edit.component.scss',
@@ -53,10 +54,16 @@ export class TodoEditComponent {
       this.editingTodoId = +params['id'];
     });
 
-    this.loadEditingTodo();
-
-    this.getAll();
+    this.getTodoCategories();
     this.getStates();
+
+    setTimeout(() => {
+      this.loadEditingTodo();
+    });
+  }
+
+  compareFn(c1: string, c2: string) {
+    return c1 == c2
   }
 
   loadEditingTodo(): void {
@@ -64,13 +71,13 @@ export class TodoEditComponent {
       this.todoForm.patchValue({
         title: todo.title,
         body: todo.body,
-        categoryId: todo.categoryId.toString(),
-        state: todo.state.toString(),
+        categoryId: '1',
+        state: '1',
       });
     });
   }
 
-  getAll(): void {
+  getTodoCategories(): void {
     this.todoCategoryService
       .getAll()
       .subscribe((todoCategories) => (this.todoCategories = todoCategories));
@@ -82,7 +89,7 @@ export class TodoEditComponent {
 
   onSubmit(): void {
     this.todoService.edit(this.editingTodoId, this.todoForm).subscribe({
-      error: (e) => console.log(e),
+      error: (e) => alert(e),
       complete: () => this.router.navigate(['/todos']),
     });
   }

@@ -30,13 +30,13 @@ export class TodoService {
   create(todoForm: FormGroup): Observable<Todo['id']> {
     return this.http.post<Todo['id']>(
       `${this.apiUrl}/api/todos`,
-      todoForm.value
+      todoForm.getRawValue()
     );
   }
 
   edit(id: Todo['id'], todoForm: FormGroup) {
     return this.http.put<Todo['id']>(
-      `${this.apiUrl}/api/todos`,
+      `${this.apiUrl}/api/todos/${id}`,
       todoForm.value
     );
   }

@@ -15,6 +15,7 @@ import { TodoCategoryService } from '../../services/todo-category.service';
 import { TodoService } from '../../services/todo.service';
 import { MatButtonModule } from '@angular/material/button';
 import { Router } from '@angular/router';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-todo-create',
@@ -36,7 +37,8 @@ export class TodoCreateComponent {
     title: ['', Validators.required],
     body: ['', Validators.required],
     categoryId: ['', Validators.required],
-    state: ['', Validators.required],
+    // 初期stateは固定
+    state: [{ value: '0', disabled: true }, Validators.required],
   });
 
   todoCategories: TodoCategory[] = [];
@@ -66,7 +68,10 @@ export class TodoCreateComponent {
 
   onSubmit(): void {
     this.todoService.create(this.todoForm).subscribe({
-      error: (e) => console.log(e),
+      error: (e: HttpErrorResponse) => {
+        console.log(e.error);
+        alert(e.error);
+      },
       complete: () => this.router.navigate(['/todos']),
     });
   }

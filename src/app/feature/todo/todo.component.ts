@@ -44,7 +44,7 @@ export class TodoComponent {
 
   deleteTodo(id: number): void {
     this.todoService.delete(id).subscribe({
-      error: (e) => console.log(e),
+      error: (e) => alert(e),
       complete: () =>
         (this.todos = this.todos.filter((todoItem) => todoItem.todo.id != id)),
     });

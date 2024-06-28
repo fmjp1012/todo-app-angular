@@ -56,6 +56,10 @@ export class TodoCategoryEditComponent {
     this.getColors();
   }
 
+  compareFn(c1: string, c2: string) {
+    return c1 == c2
+  }
+
   getColors(): void {
     this.todoCategoryService
       .getColors()
@@ -78,7 +82,7 @@ export class TodoCategoryEditComponent {
     this.todoCategoryService
       .edit(this.editingTodoCategoryId, this.todoCategoryForm)
       .subscribe({
-        error: (e) => console.log(e),
+        error: (e) => alert(e),
         complete: () => this.router.navigate(['/todoCategories']),
       });
   }

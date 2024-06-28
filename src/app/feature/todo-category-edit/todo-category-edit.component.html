@@ -11,7 +11,7 @@
 
   <mat-form-field>
     <mat-label>Color</mat-label>
-    <mat-select formControlName="color" id="color">
+    <mat-select [compareWith]="compareFn" formControlName="color" id="color">
       <mat-option *ngFor="let color of colors" [value]="color.code">
         {{ color.code }}
       </mat-option>

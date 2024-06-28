@@ -50,7 +50,7 @@ export class CategoryCreateComponent {
 
   onSubmit(): void {
     this.todoCategoryService.create(this.todoCategoryForm).subscribe({
-      error: (e) => console.log(e),
+      error: (e) => alert(e),
       complete: () => this.router.navigate(['/todoCategories']),
     });
   }

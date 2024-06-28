@@ -27,7 +27,7 @@ export class CategoryComponent {
 
   deleteTodoCategory(id: number): void {
     this.todoCategoryService.delete(id).subscribe({
-      error: (e) => console.log(e),
+      error: (e) => alert(e),
       complete: () => (this.todoCategories = this.todoCategories.filter(todoCategory => todoCategory.id != id))
     });
   }
